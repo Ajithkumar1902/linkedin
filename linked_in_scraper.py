@@ -91,7 +91,7 @@ class LinkedInScraper:
         }
 
     def finding_profile_data(self):
-        urls = self.index_col.find({'crawler_name': 'linked_in_profiles_2', 'status': False}, {'profile_url': 1})
+        urls = self.index_col.find({'crawler_name': 'linked_in_profiles', 'status': False}, {'profile_url': 1})
         for doc in urls:
             profile_url = doc['profile_url']
             try:
