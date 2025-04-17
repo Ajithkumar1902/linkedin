@@ -14,7 +14,7 @@ class LinkedInScraper:
 
     def __init__(self):
         self.mongocon = pymongo.MongoClient("mongodb://localhost:27017/bot_scrapy")
-        db = self.mongocon["Ajith_Local_DB"]
+        db = self.mongocon["Local_DB"]
         self.index_col = db["selenium_crawled_index"]
         self.product_col = db["selenium_scrapde_product"]
         now = datetime.now(timezone('UTC'))
