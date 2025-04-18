@@ -19,16 +19,19 @@ class LinkedInScraper:
         self.product_col = db["selenium_scrapde_product"]
         now = datetime.now(timezone('UTC'))
         self.scrap_datetime = now.strftime("%Y-%m-%d %H:%M:%S")
-        self.urban_vpn_path = Path.home() / '.selenium/urbanvpn'
+        self.vpn_path = os.path.abspath(str(Path.home())+'/.selenium/urbanvpn')
         self.insert_count = 0
 
     def web_open(self):
         options = Options()
         options.add_argument('--log-level=3')
-        options.add_argument(f'--load-extension={self.urban_vpn_path.resolve()}')
+        options.add_argument(f'--load-extension={self.vpn_path}')
         self.driver = uc.Chrome(options=options)
         self.driver.get("https://www.linkedin.com/login")
-        self.driver.maximize_window()
+        self.driver.implicitly_wait(10)
+        cookies = self.driver.get_cookies()
+        for cookie in cookies:
+            self.driver.add_cookie(cookie)
 
     def login(self):
         self.driver.find_element(By.ID, "username").send_keys("")
